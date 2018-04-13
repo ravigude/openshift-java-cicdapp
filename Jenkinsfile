@@ -5,7 +5,11 @@ pipeline {
         stage('Build') {
             steps {
                echo "Build empty"
-                sh "ls -la "
+               script {
+                        ls -la
+                        
+                    }
+                }
             }
         }
      
