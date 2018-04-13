@@ -7,7 +7,7 @@ pipeline {
                echo "Build empty"
                script {
                         ls -la
-                        
+                         
                     }
                 }
             }
