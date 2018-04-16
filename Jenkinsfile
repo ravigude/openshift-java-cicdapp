@@ -81,7 +81,11 @@ pipeline {
 
     post { 
      
+        always {
 
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'build/reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'FindBugs'])
+
+        }
         failure {
             //slackNotify("FAILURE")
         }

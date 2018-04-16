@@ -53,12 +53,9 @@ sonarqube {
     properties {
         property 'sonar.projectName', 'helloworld'
 		property "sonar.host.url", "http://sonarqube-ci.apps.odos.360it.io"
-        property "sonar.jdbc.url", "jdbc:postgresql://postgress-sonar.apps.odos.360it.io:5432/sonar"
-        property "sonar.jdbc.driverClassName", "org.postgresql.Driver"
-        property "sonar.username", "sonar"
-        property "sonar.password", "sonar"
         property "sonar.jacoco.reportPath", "build/jacoco/test.exec"
         property "sonar.java.source property", "1.8"
+        property "sonar.profile", "ODOS-Profile"
         }
 }
 
