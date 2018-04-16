@@ -6,8 +6,8 @@ pipeline {
             steps {
                echo "Build empty"
                script {
-                        ls -la
                          
+                            sh './gradlew clean build'
                     }
                 }
             }
@@ -55,6 +55,9 @@ pipeline {
                   
                     steps {
                         echo " OWASP On Branch B"
+                        script {
+                        sh './gradlew dependencyCheckAnalyze'
+                        }
                     }
                 }
             }
