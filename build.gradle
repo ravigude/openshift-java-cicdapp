@@ -52,7 +52,7 @@ dependencies {
 sonarqube {
     properties {
         property 'sonar.projectName', 'helloworld'
-		property "sonar.host.url", "http://sonar.apps.odos.360it.io"
+		property "sonar.host.url", "http://sonarqube.apps.odos.360it.io"
         property "sonar.jacoco.reportPath", "build/jacoco/test.exec"
         property "sonar.java.source property", "1.8"
          
