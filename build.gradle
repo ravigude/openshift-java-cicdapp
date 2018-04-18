@@ -61,15 +61,11 @@ sonarqube {
         }
 }
 
-
-
-checkstyle {  
-    configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
-
-}
+ 
 
 
 tasks.withType(Checkstyle) {
+     configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
     ignoreFailures = true
     reports {
         xml.enabled false
@@ -79,14 +75,13 @@ tasks.withType(Checkstyle) {
     }
 }
 
-findbugs  {
+ 
+
+tasks.withType(FindBugs) {
 
     effort = "max"
     reportLevel = "low"
-   
-}
 
-tasks.withType(FindBugs) {
     ignoreFailures = true
         reports {
         xml.enabled false
@@ -98,13 +93,10 @@ tasks.withType(FindBugs) {
 
 
 
-pmd  {
-
-   ruleSetFiles = files("${project.rootDir}/config/pmd/rules-pmd.xml")
-   
-}
+ 
 
 tasks.withType(Pmd) {
+     ruleSetFiles = files("${project.rootDir}/config/pmd/rules-pmd.xml")
     ignoreFailures = true
         reports {
         xml.enabled false
