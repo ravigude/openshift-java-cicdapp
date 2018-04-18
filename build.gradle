@@ -74,6 +74,7 @@ tasks.withType(Checkstyle) {
     reports {
         xml.enabled false
         html.enabled true
+        html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
         html.destination "$project.buildDir/outputs/checkstyle/checkstyle.html"
     }
 }
@@ -90,6 +91,7 @@ tasks.withType(FindBugs) {
         reports {
         xml.enabled false
         html.enabled true
+        html.stylesheet resources.text.fromFile('config/xsl/findbugs-custom.xsl')
         html.destination "$project.buildDir/outputs/findbugs/findbugs.html"
     }
 }
@@ -116,7 +118,7 @@ jacocoTestReport {
     reports {
         xml.enabled false
         html.enabled true
-        html.destination "$project.buildDir/outputs/jacoco/jacoco.html"
+        html.destination "$project.buildDir/outputs/jacoco"
     }
 }
 
