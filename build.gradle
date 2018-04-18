@@ -21,10 +21,12 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.owasp.dependencycheck'
+
+apply plugin: 'org.sonarqube'
 apply plugin: 'jacoco'
 apply plugin: 'findbugs'
-apply plugin: 'org.sonarqube'
 apply plugin: 'checkstyle'
+apply plugin: 'pmd'
  
 group = 'com.ce5systems.ocp'
 version = '0.0.1-SNAPSHOT'
@@ -59,57 +61,79 @@ sonarqube {
         }
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-        html.destination file("${buildDir}/jacocoHtml")
-    }
-}
 
 
- checkstyle {
-    toolVersion '7.8.1'
-    configFile file("config/checkstyle/checkstyle.xml")
-     
-}
+checkstyle {  
+    configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
 
-checkstyleMain {
-    source ='src/main/java'
-    ignoreFailures true
-}
-checkstyleTest {
-    source ='src/test/java'
-    ignoreFailures true
 }
 
 
 tasks.withType(Checkstyle) {
+    ignoreFailures = true
     reports {
         xml.enabled false
         html.enabled true
         html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
+        html.destination "$project.buildDir/outputs/checkstyle/checkstyle.html"
     }
 }
 
+findbugs  {
 
-findbugs {
-    ignoreFailures = true 
-    toolVersion = "3.0.1"
-    sourceSets=[sourceSets.main]
-    reportsDir = file("$project.buildDir/reports/findbugs")
     effort = "max"
+    reportLevel = "low"
+   
 }
 
-
 tasks.withType(FindBugs) {
-    reports {
+    ignoreFailures = true
+        reports {
         xml.enabled false
         html.enabled true
         html.stylesheet resources.text.fromFile('config/xsl/findbugs-custom.xsl')
+        html.destination "$project.buildDir/outputs/findbugs/findbugs.html"
+    }
+}
+
+
+
+pmd  {
+
+   ruleSetFiles = files("${project.rootDir}/config/pmd/rules-pmd.xml")
+   
+}
+
+tasks.withType(Pmd) {
+    ignoreFailures = true
+        reports {
+        xml.enabled false
+        html.enabled true
+        html.destination "$project.buildDir/outputs/pmd/pmd.html"
+    }
+}
+
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        html.enabled true
+        html.destination "$project.buildDir/outputs/jacoco/jacoco.html"
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.10
+            }
+        }
     }
 }
  
+jacocoTestReport.dependsOn jacocoTestCoverageVerification
+test { finalizedBy jacocoTestReport }
 
 
 dependencyManagement {
