@@ -52,7 +52,7 @@ pipeline {
                               steps {
                                   echo "Sonar On Branch B"
                                           withSonarQubeEnv('sonarqube-odos') {
-                                  sh './gradlew sonarqube'
+                                             sh './gradlew sonarqube'
                                           }
                                   script {
                                        def qg = waitForQualityGate()
@@ -100,7 +100,7 @@ pipeline {
 
                   always {
                         
-                        junit 'build/reports/**/*.xml' 
+                        junit 'build/test-results/**/*.xml' 
                                     
           
                       publishHTML (target: [
