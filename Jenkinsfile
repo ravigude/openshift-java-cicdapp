@@ -100,8 +100,8 @@ pipeline {
 
                   always {
                         
-                         
-             
+                        junit 'build/reports/**/*.xml' 
+                                    
           
                       publishHTML (target: [
                         allowMissing: false,
@@ -139,14 +139,7 @@ pipeline {
                         reportName: "JaCoCo"
                       ])
                       
-                       publishHTML (target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: '/build/test-results/test',
-                        reportFiles: '*.xml',
-                        reportName: "Junit"
-                      ])
+                       
                       
                       
                       sleep 20
