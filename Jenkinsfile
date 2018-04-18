@@ -51,7 +51,9 @@ pipeline {
                           stage('Sonar') {
                               steps {
                                   echo "Sonar On Branch B"
+                                          withSonarQubeEnv('sonarqube-odos') {
                                   sh './gradlew sonarqube'
+                                          }
                                   script {
                                        def qg = waitForQualityGate()
                                        if (qg.status != 'OK') {
