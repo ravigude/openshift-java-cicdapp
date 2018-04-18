@@ -67,13 +67,13 @@ pipeline {
                             
                               steps {
                                  
-                              sh './gradlew dependencyCheckAnalyze'
+                              echo "Owasp"
                         
                               }
                           }
                           stage('Analyse') {
                                       steps {
-                                          sh './gradlew check jacocoTestCoverageVerification'
+                                         echo "Analysis"
                                       }
                             }
                       }
