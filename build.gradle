@@ -64,7 +64,10 @@ sonarqube {
         }
 }
 
-
+testJunit {
+    reports.junitXml.enabled = true
+    reports.html.enabled = true
+}
 
 checkstyle {  
     configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
